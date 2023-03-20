@@ -1,20 +1,41 @@
 import { useState } from "react";
-import { View, ScrollView, SafeAreaView } from 'react-native';
+import { View, Text, ScrollView, SafeAreaView } from 'react-native';
 import { Stack, useRouter } from 'expo-router';
-import { COLORS, icons, images, SIZES } from '../constants/index.js';
-import { Nearbyjobs, Popularjobs, ScreenHeaderBtn, Welcome } from '../components/index.js';
+import { COLORS, icons, images, SIZES } from '../constants';
+import { Nearbyjobs, Popularjobs, ScreenHeaderBtn, Welcome } from '../components';
 
 const Home = () => {
     const router = useRouter();
 
     return (
-        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite}}>
+        <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.
+        lightWhite}}>
             <Stack.Screen 
             options={{ 
-                headerStyle: { backgroundColor: COLORS.lightWhite }
-            }}>
+                headerStyle: { backgroundColor: COLORS.lightWhite },
+                headerShadowVisible: false,
+                headerLeft: () => (
+                <ScreenHeaderBtn iconUrl={icons.menu} dimension="60%"/>),
+                headerRight: () => (
+                    <ScreenHeaderBtn iconUrl={icons.menu} dimension="100%"/>)
+            }} 
+            />
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <View 
+                style={{
+                    flex: 1,
+                    padding: SIZES.medium
+                }}> 
+                <Welcome 
+                />
 
-            </Stack.Screen>
+                <Popularjobs />
+
+                <Nearbyjobs />
+
+                </View>
+
+            </ScrollView>
         </SafeAreaView>
     )
 }
